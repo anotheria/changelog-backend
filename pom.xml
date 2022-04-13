@@ -1,0 +1,185 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>net.anotheria</groupId>
+		<artifactId>parent</artifactId>
+		<version>2.13</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.anotheria</groupId>
+	<artifactId>changelog</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>changelog backend</name>
+
+    <properties>
+        <moskito.version>2.10.0</moskito.version>
+		<aspectj.version>1.8.7</aspectj.version>
+		<aspectj-maven-plugin.version>1.8</aspectj-maven-plugin.version>
+		<aspectj-maven-plugin.complianceLevel>1.8</aspectj-maven-plugin.complianceLevel>
+		<source-version>1.8</source-version>
+		<target-version>1.8</target-version>
+		<jersey-version>1.18.1</jersey-version>
+
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+    </properties>
+
+    <dependencies>
+		<!-- logging -->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+			<version>1.7.21</version>
+		</dependency>
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+			<version>1.2.0</version>
+		</dependency>        
+		<dependency>
+            <groupId>net.anotheria</groupId>
+            <artifactId>configureme</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+
+		<dependency>
+			<groupId>net.anotheria</groupId>
+			<artifactId>moskito-inspect-embedded</artifactId>
+			<version>${moskito.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.anotheria</groupId>
+			<artifactId>moskito-core</artifactId>
+			<version>${moskito.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.anotheria</groupId>
+			<artifactId>moskito-aop</artifactId>
+			<version>${moskito.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.anotheria</groupId>
+			<artifactId>moskito-webui</artifactId>
+			<version>${moskito.version}</version>
+		</dependency>
+        <!-- jersey -->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-client</artifactId>
+				<version>${jersey-version}</version>
+			</dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+			<version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+			<version>${jersey-version}</version>
+        </dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-multipart</artifactId>
+			<version>${jersey-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.10.0.pr1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+
+	</dependencies>
+
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <executions>
+            <execution>
+              <phase>initialize</phase>
+              <goals>
+                <goal>unpack</goal>
+              </goals>
+              <configuration>
+                <artifactItems>
+                  <artifactItem>
+                    <groupId>net.anotheria</groupId>
+                    <artifactId>moskito-webui</artifactId>
+                    <version>${moskito.version}</version>
+                    <type>jar</type>
+                    <overWrite>true</overWrite>
+                    <outputDirectory>${project.build.directory}/tmp/media</outputDirectory>
+                    <includes>moskito/**,**/*.jsp</includes>
+                  </artifactItem>
+                </artifactItems>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.1</version>
+          <configuration>
+            <warName>ROOT</warName>
+            <webResources>
+              <resource>
+                <!-- this is relative to the pom.xml directory -->
+                <directory>src/main/java</directory>
+                <includes>
+                  <include>**/*.jsp</include>
+                </includes>
+              </resource>
+              <resource>
+                <directory>${project.build.directory}/tmp/media</directory>
+              </resource>
+            </webResources>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+          </configuration>
+        </plugin>
+
+      </plugins>
+    </build>
+
+
+	<scm>
+        <url>git:git@github.com:anotheria/changelog-backend.git</url>
+        <connection>scm:git:git@github.com:anotheria/changelog-backend.git</connection>
+        <developerConnection>scm:git:git@github.com:anotheria/changelog-backend.git</developerConnection>
+    </scm>
+
+</project>
