@@ -1,7 +1,8 @@
-package net.anotheria.changelog.api;
+package net.anotheria.changelog.api.changelog;
 
 import net.anotheria.anoplass.api.API;
 import net.anotheria.anoplass.api.APIException;
+import net.anotheria.changelog.api.changelog.bean.ChangeLogAO;
 
 import java.util.List;
 

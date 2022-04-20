@@ -1,5 +1,6 @@
 package net.anotheria.changelog.api;
 
+import net.anotheria.changelog.api.changelog.bean.ChangeLogAO;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

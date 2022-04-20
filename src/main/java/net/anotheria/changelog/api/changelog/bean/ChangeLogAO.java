@@ -1,4 +1,4 @@
-package net.anotheria.changelog.api;
+package net.anotheria.changelog.api.changelog.bean;
 
 import net.anotheria.util.NumberUtils;
 

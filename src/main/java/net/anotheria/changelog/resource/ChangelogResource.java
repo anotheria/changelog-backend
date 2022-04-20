@@ -2,7 +2,7 @@ package net.anotheria.changelog.resource;
 
 import net.anotheria.anoplass.api.APIException;
 import net.anotheria.anoplass.api.APIFinder;
-import net.anotheria.changelog.api.ChangeLogAPI;
+import net.anotheria.changelog.api.changelog.ChangeLogAPI;
 import net.anotheria.moskito.aop.annotation.Monitor;
 
 import javax.ws.rs.Consumes;
