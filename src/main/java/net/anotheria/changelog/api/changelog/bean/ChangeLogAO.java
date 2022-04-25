@@ -1,5 +1,6 @@
 package net.anotheria.changelog.api.changelog.bean;
 
+import net.anotheria.changelog.biz.changelog.bean.ChangeLogType;
 import net.anotheria.util.NumberUtils;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public class ChangeLogAO {
 
+	private Long id;
 	private long timestamp;
 	private String author;
 	private String message;
@@ -20,6 +22,14 @@ public class ChangeLogAO {
 	private List<String> tags = new ArrayList<>();
 	private ChangeLogType type;
 	private String dateAsString;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public void addTag(String tag) {
 		tags.add(tag);
@@ -29,10 +39,6 @@ public class ChangeLogAO {
 		timestamp = l;
 		dateAsString = NumberUtils.makeDigitalDateString(l)+" "+NumberUtils.makeTimeString(l);
 	}
-
-	public enum ChangeLogType{
-		CHANGE, CRASH;
-	};
 
 	public String getAuthor() {
 		return author;

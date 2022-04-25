@@ -13,7 +13,14 @@ import java.util.List;
  * @since 13.04.22 14:49
  */
 public interface ChangeLogAPI extends API {
-	List<ChangeLogAO> getEntries() throws APIException;
+
+    int save(ChangeLogAO changeLogAO) throws APIException;
+
+    ChangeLogAO get(int id) throws APIException;
+
+    void delete(int id) throws APIException;
+
+    List<ChangeLogAO> getEntries() throws APIException;
 
 	List<ChangeLogAO> searchEntries(String criteria) throws APIException;
 }

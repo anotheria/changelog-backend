@@ -14,13 +14,26 @@
 	<name>changelog backend</name>
 
     <properties>
-        <moskito.version>2.10.0</moskito.version>
-		<aspectj.version>1.8.7</aspectj.version>
+		<moskito-version>2.10.1-SNAPSHOT</moskito-version>
+		<aspectj-version>1.8.8</aspectj-version>
 		<aspectj-maven-plugin.version>1.8</aspectj-maven-plugin.version>
 		<aspectj-maven-plugin.complianceLevel>1.8</aspectj-maven-plugin.complianceLevel>
 		<source-version>1.8</source-version>
 		<target-version>1.8</target-version>
-		<jersey-version>1.18.1</jersey-version>
+		<jersey-version>1.19.4</jersey-version>
+		<jackson-version>2.9.10</jackson-version>
+
+		<portalkit-version>1.3.7-SNAPSHOT</portalkit-version>
+
+		<ano-db-version>2.1.0</ano-db-version>
+		<ano-util-version>2.1.8</ano-util-version>
+		<ano-configureme-version>2.3.4</ano-configureme-version>
+
+		<spring-version>4.2.4.RELEASE</spring-version>
+		<spring-data-jpa-version>1.9.4.RELEASE</spring-data-jpa-version>
+
+		<hibernate-version>4.3.8.Final</hibernate-version>
+		<hibernate-validator-version>5.1.3.Final</hibernate-validator-version>
 
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -38,7 +51,7 @@
 		    <groupId>ch.qos.logback</groupId>
 		    <artifactId>logback-classic</artifactId>
 			<version>1.2.0</version>
-		</dependency>        
+		</dependency>
 		<dependency>
             <groupId>net.anotheria</groupId>
             <artifactId>configureme</artifactId>
@@ -48,23 +61,76 @@
 		<dependency>
 			<groupId>net.anotheria</groupId>
 			<artifactId>moskito-inspect-embedded</artifactId>
-			<version>${moskito.version}</version>
+			<version>${moskito-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.anotheria</groupId>
 			<artifactId>moskito-core</artifactId>
-			<version>${moskito.version}</version>
+			<version>${moskito-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.anotheria</groupId>
 			<artifactId>moskito-aop</artifactId>
-			<version>${moskito.version}</version>
+			<version>${moskito-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.anotheria</groupId>
 			<artifactId>moskito-webui</artifactId>
-			<version>${moskito.version}</version>
+			<version>${moskito-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>portalkit</groupId>
+			<artifactId>services-accountservice</artifactId>
+			<version>${portalkit-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>portalkit</groupId>
+			<artifactId>services-accountsettingsservice</artifactId>
+			<version>${portalkit-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>portalkit</groupId>
+			<artifactId>services-authenticationservice</artifactId>
+			<version>${portalkit-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>portalkit</groupId>
+			<artifactId>services-foreignidservice</artifactId>
+			<version>${portalkit-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>portalkit</groupId>
+			<artifactId>services-approvalservice</artifactId>
+			<version>${portalkit-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.anotheria</groupId>
+			<artifactId>ano-db</artifactId>
+			<version>${ano-db-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.anotheria</groupId>
+			<artifactId>ano-util</artifactId>
+			<version>${ano-util-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.anotheria</groupId>
+			<artifactId>configureme</artifactId>
+			<version>${ano-configureme-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-json</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>jsr311-api</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
         <!-- jersey -->
         <dependency>
             <groupId>com.sun.jersey</groupId>
@@ -114,6 +180,66 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring-data-jpa-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.1.6.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator-version}</version>
+		</dependency>
+
+		
+
 	</dependencies>
 
     <build>
@@ -132,7 +258,7 @@
                   <artifactItem>
                     <groupId>net.anotheria</groupId>
                     <artifactId>moskito-webui</artifactId>
-                    <version>${moskito.version}</version>
+                    <version>${moskito-version}</version>
                     <type>jar</type>
                     <overWrite>true</overWrite>
                     <outputDirectory>${project.build.directory}/tmp/media</outputDirectory>

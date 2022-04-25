@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 docker run \
+    --rm \
+    --network chagelog-network \
     --name changelog-postgres \
-    -p 5433:5433 \
+    -p 6432:5432 \
     -e POSTGRES_USER=changelog \
     -e POSTGRES_PASSWORD=changelog \
     -e POSTGRES_DB=changelog \

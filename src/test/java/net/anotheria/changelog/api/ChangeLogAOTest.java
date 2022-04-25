@@ -1,6 +1,7 @@
 package net.anotheria.changelog.api;
 
 import net.anotheria.changelog.api.changelog.bean.ChangeLogAO;
+import net.anotheria.changelog.biz.changelog.bean.ChangeLogType;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -39,7 +40,7 @@ public class ChangeLogAOTest {
 		ChangeLogAO entry = new ChangeLogAO();
 
 		entry.setAuthor("Shakespeare");
-		entry.setType(ChangeLogAO.ChangeLogType.CHANGE);
+		entry.setType(ChangeLogType.CHANGE);
 		entry.setMessage("Wrote a Novel");
 		entry.setReason("For money");
 		entry.addTag("novel"); entry.addTag("pencil");

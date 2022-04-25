@@ -3,7 +3,13 @@ package net.anotheria.changelog.api.changelog;
 import net.anotheria.anoplass.api.APIException;
 import net.anotheria.anoplass.api.APIInitException;
 import net.anotheria.anoplass.api.AbstractAPIImpl;
+import net.anotheria.anoprise.metafactory.MetaFactory;
+import net.anotheria.anoprise.metafactory.MetaFactoryException;
 import net.anotheria.changelog.api.changelog.bean.ChangeLogAO;
+import net.anotheria.changelog.biz.changelog.ChangeLogService;
+import net.anotheria.changelog.biz.changelog.bean.ChangeLogBO;
+import net.anotheria.changelog.biz.changelog.exception.ChangeLogServiceException;
+import net.anotheria.changelog.biz.changelog.bean.ChangeLogType;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -18,6 +24,7 @@ import java.util.Random;
  */
 public class ChangeLogAPIImpl extends AbstractAPIImpl implements ChangeLogAPI {
 
+	private ChangeLogService changeLogService;
 
 	private List<ChangeLogAO> dummyData;
 
@@ -25,9 +32,47 @@ public class ChangeLogAPIImpl extends AbstractAPIImpl implements ChangeLogAPI {
 	public void init() throws APIInitException {
 		super.init();
 
+		try {
+			changeLogService = MetaFactory.get(ChangeLogService.class);
+		} catch (MetaFactoryException e) {
+			String failMsg = "MetaFactory failed during initialization";
+			log.error(failMsg, e);
+			throw new APIInitException(failMsg, e);
+		}
+		
 		dummyData = generateDummyData();
+	}
 
+	@Override
+	public int save(ChangeLogAO changeLogAO) throws APIException {
+		try {
+			ChangeLogBO changeLogBO = ChangeLogObjectMapper.map(changeLogAO);
+			return changeLogService.save(changeLogBO);
+		} catch (ChangeLogServiceException e) {
+			log.error(e.getMessage(), e);
+			throw new APIException(e.getMessage(), e);
+		}
+	}
 
+	@Override
+	public ChangeLogAO get(int id) throws APIException {
+		try {
+			ChangeLogBO changeLogBO = changeLogService.get(id);
+			return ChangeLogObjectMapper.map(changeLogBO);
+		} catch (ChangeLogServiceException e) {
+			log.error(e.getMessage(), e);
+			throw new APIException(e.getMessage(), e);
+		}
+	}
+
+	@Override
+	public void delete(int id) throws APIException {
+		try {
+			changeLogService.delete(id);
+		} catch (ChangeLogServiceException e) {
+			log.error(e.getMessage(), e);
+			throw new APIException(e.getMessage(), e);
+		}
 	}
 
 	static Random dummyRnd = new Random(System.nanoTime());
@@ -48,7 +93,7 @@ public class ChangeLogAPIImpl extends AbstractAPIImpl implements ChangeLogAPI {
 			ao.setAuthor(dummyPickOne(AUTHORS));
 			ao.setReason(dummyPickOne(REASONS));
 			ao.setMessage(dummyPickOne(CHANGES));
-			ao.setType(dummyPickOne(ChangeLogAO.ChangeLogType.values()));
+			ao.setType(dummyPickOne(ChangeLogType.values()));
 			ao.setTimestamp(System.currentTimeMillis()-dummyRnd.nextInt(1000*3600*24));
 			ao.addTag(dummyPickOne(TAGS));
 			ao.addTag(dummyPickOne(TAGS));
