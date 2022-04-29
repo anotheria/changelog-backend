@@ -1,29 +1,35 @@
 {
   "driver": "org.postgresql.Driver",
-  "url": "jdbc:postgresql://localhost:6432/changelog",
+  "url": "jdbc:postgresql://changelog-postgres:5432/changelog",
   "username": "changelog",
   "password": "changelog",
   "dev": {
     "driver": "org.postgresql.Driver",
-    "url": "jdbc:postgresql://localhost:6432/changelog",
+    "url": "jdbc:postgresql://changelog-postgres:5432/changelog",
     "username": "changelog",
-    "password": "changelog"
+    "password": "changelog",
+    "gsokolov": {
+      "url": "jdbc:postgresql://localhost:6432/changelog",
+      "docker" : {
+        "url": "jdbc:postgresql://changelog-postgres:5432/changelog"
+      }
+    }
   },
   "test": {
     "driver": "org.postgresql.Driver",
-    "url": "jdbc:postgresql://localhost:6432/changelog",
+    "url": "jdbc:postgresql://changelog-postgres:5432/changelog",
     "username": "changelog",
     "password": "changelog"
   },
   "beta": {
     "driver": "org.postgresql.Driver",
-    "url": "jdbc:postgresql://localhost:6432/changelog",
+    "url": "jdbc:postgresql://changelog-postgres:5432/changelog",
     "username": "changelog",
     "password": "changelog"
   },
   "prod": {
     "driver": "org.postgresql.Driver",
-    "url": "jdbc:postgresql://localhost:6432/changelog",
+    "url": "jdbc:postgresql://changelog-postgres:5432/changelog",
     "username": "changelog",
     "password": "changelog"
   }

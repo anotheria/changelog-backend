@@ -1,8 +1,5 @@
 package net.anotheria.changelog.listener;
 
-import net.anotheria.anoplass.api.APIFinder;
-import net.anotheria.changelog.api.changelog.ChangeLogAPI;
-import net.anotheria.changelog.api.changelog.ChangeLogAPIFactory;
 import net.anotheria.changelog.api.shared.APITierConfigurator;
 import net.anotheria.changelog.biz.shared.BusinessTierConfigurator;
 import org.configureme.ConfigurationManager;
