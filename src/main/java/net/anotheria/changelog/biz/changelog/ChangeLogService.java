@@ -22,4 +22,5 @@ public interface ChangeLogService extends Service {
 
     List<ChangeLogBO> list() throws ChangeLogServiceException;
 
+    List<String> getTags() throws ChangeLogServiceException;
 }

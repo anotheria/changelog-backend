@@ -12,6 +12,7 @@ import net.anotheria.changelog.biz.changelog.exception.ChangeLogServiceException
 import net.anotheria.changelog.biz.changelog.bean.ChangeLogType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -86,7 +87,22 @@ public class ChangeLogAPIImpl extends AbstractAPIImpl implements ChangeLogAPI {
 		}
 	}
 
-	static Random dummyRnd = new Random(System.nanoTime());
+    @Override
+    public List<ChangeLogType> getTypes() throws APIException {
+        return Arrays.asList(ChangeLogType.values());
+    }
+
+    @Override
+    public List<String> getTags() throws APIException {
+        try {
+            return changeLogService.getTags();
+        } catch (ChangeLogServiceException e) {
+            log.error(e.getMessage(), e);
+            throw new APIException(e.getMessage(), e);
+        }
+    }
+
+    static Random dummyRnd = new Random(System.nanoTime());
 
 	private static<T>  T dummyPickOne(T[] array){
 		return array[dummyRnd.nextInt(array.length)];

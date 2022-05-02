@@ -3,6 +3,7 @@ package net.anotheria.changelog.api.changelog;
 import net.anotheria.anoplass.api.API;
 import net.anotheria.anoplass.api.APIException;
 import net.anotheria.changelog.api.changelog.bean.ChangeLogAO;
+import net.anotheria.changelog.biz.changelog.bean.ChangeLogType;
 
 import java.util.List;
 
@@ -25,4 +26,8 @@ public interface ChangeLogAPI extends API {
     List<ChangeLogAO> getEntries() throws APIException;
 
 	List<ChangeLogAO> searchEntries(String criteria) throws APIException;
+
+    List<ChangeLogType> getTypes() throws APIException;
+
+    List<String> getTags() throws APIException;
 }

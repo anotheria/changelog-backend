@@ -4,6 +4,7 @@ import net.anotheria.anoplass.api.APIException;
 import net.anotheria.anoplass.api.APIFinder;
 import net.anotheria.changelog.api.changelog.ChangeLogAPI;
 import net.anotheria.changelog.api.changelog.bean.ChangeLogAO;
+import net.anotheria.changelog.resource.BaseResource;
 import net.anotheria.changelog.resource.ReplyObject;
 import net.anotheria.moskito.aop.annotation.Monitor;
 
@@ -27,7 +28,7 @@ import java.util.List;
 @Path("/changelog")
 
 @Monitor(category = "resource")
-public class ChangelogResource {
+public class ChangelogResource extends BaseResource {
 
 	private static ChangeLogAPI changeLogAPI = APIFinder.findAPI(ChangeLogAPI.class);
 
@@ -37,7 +38,7 @@ public class ChangelogResource {
 	public ReplyObject get(@PathParam("id") Integer id){
 		try {
 			return ReplyObject.success("data", changeLogAPI.get(id));
-		}catch(APIException e){
+		} catch(APIException e){
 			return ReplyObject.error(e);
 		}
 	}
@@ -57,6 +58,20 @@ public class ChangelogResource {
 		List<ChangeLogAO> list = changeLogAPI.list();
 		list.addAll(changeLogAPI.getEntries());
 		return ReplyObject.success("data", list);
+	}
+
+    @GET
+    @Path("/types")
+//	@SecurityRequirement(name = "authToken")
+    public ReplyObject types() throws APIException {
+        return ReplyObject.success("data", changeLogAPI.getTypes());
+    }
+
+	@GET
+	@Path("/tags")
+//	@SecurityRequirement(name = "authToken")
+	public ReplyObject tags() throws APIException {
+		return ReplyObject.success("data", changeLogAPI.getTags());
 	}
 
 	@GET

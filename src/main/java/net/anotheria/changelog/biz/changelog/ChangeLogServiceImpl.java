@@ -88,4 +88,13 @@ public class ChangeLogServiceImpl implements ChangeLogService {
             throw new ChangeLogServiceException(String.format("Failed to get list entity"), e);
         }
     }
+
+    @Override
+    public List<String> getTags() throws ChangeLogServiceException {
+        try {
+            return repository.findAllTags();
+        } catch (Exception e) {
+            throw new ChangeLogServiceException(String.format("Failed to get list entity"), e);
+        }
+    }
 }
