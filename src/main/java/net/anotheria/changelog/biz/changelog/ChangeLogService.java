@@ -7,6 +7,8 @@ import org.distributeme.annotation.DistributeMe;
 import org.distributeme.annotation.FailBy;
 import org.distributeme.core.failing.RetryCallOnce;
 
+import java.util.List;
+
 @DistributeMe(initcode = {
         "net.anotheria.changelog.biz.changelog.ChangeLogServiceSpringConfigurator.configure();",
 })
@@ -17,5 +19,7 @@ public interface ChangeLogService extends Service {
     ChangeLogBO get(int id) throws ChangeLogServiceException;
 
     void delete(int id) throws ChangeLogServiceException;
+
+    List<ChangeLogBO> list() throws ChangeLogServiceException;
 
 }

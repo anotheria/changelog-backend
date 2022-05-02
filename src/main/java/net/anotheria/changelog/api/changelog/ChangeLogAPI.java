@@ -20,6 +20,8 @@ public interface ChangeLogAPI extends API {
 
     void delete(int id) throws APIException;
 
+    List<ChangeLogAO> list() throws APIException;
+
     List<ChangeLogAO> getEntries() throws APIException;
 
 	List<ChangeLogAO> searchEntries(String criteria) throws APIException;

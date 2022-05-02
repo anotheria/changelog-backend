@@ -13,7 +13,8 @@
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>
-					net.anotheria.changelog.resource
+					net.anotheria.changelog.resource.changelog,
+					net.anotheria.changelog.resource.ping
 			</param-value>
         </init-param>
         <init-param>

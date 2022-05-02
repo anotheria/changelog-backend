@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * {@link ChangeLogService} implementation.
  *
@@ -77,6 +79,13 @@ public class ChangeLogServiceImpl implements ChangeLogService {
         }
     }
 
-
-
+    @Override
+    public List<ChangeLogBO> list() throws ChangeLogServiceException {
+        try {
+            List<ChangeLogEntity> entities = repository.findAll();
+            return ChangeLogObjectMapper.mapItems(entities);
+        } catch (Exception e) {
+            throw new ChangeLogServiceException(String.format("Failed to get list entity"), e);
+        }
+    }
 }

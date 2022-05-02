@@ -75,6 +75,17 @@ public class ChangeLogAPIImpl extends AbstractAPIImpl implements ChangeLogAPI {
 		}
 	}
 
+	@Override
+	public List<ChangeLogAO> list() throws APIException {
+		try {
+			List<ChangeLogBO> changeLogBOList = changeLogService.list();
+			return ChangeLogObjectMapper.mapItems(changeLogBOList);
+		} catch (ChangeLogServiceException e) {
+			log.error(e.getMessage(), e);
+			throw new APIException(e.getMessage(), e);
+		}
+	}
+
 	static Random dummyRnd = new Random(System.nanoTime());
 
 	private static<T>  T dummyPickOne(T[] array){
