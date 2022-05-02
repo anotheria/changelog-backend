@@ -7,4 +7,4 @@ docker run \
     -p 8080:8080 \
     -e CONFIGUREME_ENVIRONMENT=dev_gsokolov_docker \
     -d \
-    changelog
+    anotheria/changelog
