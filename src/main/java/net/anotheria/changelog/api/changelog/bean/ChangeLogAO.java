@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ChangeLogAO {
 
-	private Long id;
+	private Integer id;
 	private long timestamp;
 	private String author;
 	private String message;
@@ -23,11 +23,11 @@ public class ChangeLogAO {
 	private ChangeLogType type;
 	private String dateAsString;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -69,7 +69,8 @@ public class ChangeLogAO {
 	}
 
 	public void setTags(List<String> tags) {
-		this.tags = tags;
+		this.tags.clear();
+		this.tags.addAll(tags);
 	}
 
 	public ChangeLogType getType() {

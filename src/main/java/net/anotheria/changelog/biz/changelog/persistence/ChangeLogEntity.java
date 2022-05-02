@@ -2,30 +2,30 @@ package net.anotheria.changelog.biz.changelog.persistence;
 
 import net.anotheria.changelog.biz.changelog.bean.ChangeLogType;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * ChangeLog DB entity
  *
  */
 @Entity
-@Table(name = "changelog_bbb")
+@Table(name = "changelog")
 public class ChangeLogEntity {
 
     @Id
@@ -41,21 +41,23 @@ public class ChangeLogEntity {
     @Column(name = "reason")
     private String reason;
 
-//    private List<String> tags = new ArrayList<>();
+    @OneToMany(mappedBy = "id.changelogId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @NotFound(action = NotFoundAction.IGNORE)
+    private List<ChangeLogTagEntity> tags;
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private ChangeLogType type;
 
     @Column(name = "time_when")
-    private long timestamp;
+    private Date timeWhen;
 
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "created_at", updatable = false, nullable = false)
     private Date created;
 
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false)
     private Date updated;
 
     public Integer getId() {
@@ -90,6 +92,14 @@ public class ChangeLogEntity {
         this.reason = reason;
     }
 
+    public List<ChangeLogTagEntity> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<ChangeLogTagEntity> tags) {
+        this.tags = tags;
+    }
+
     public ChangeLogType getType() {
         return type;
     }
@@ -98,12 +108,12 @@ public class ChangeLogEntity {
         this.type = type;
     }
 
-    public long getTimestamp() {
-        return timestamp;
+    public Date getTimeWhen() {
+        return timeWhen;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public void setTimeWhen(Date timeWhen) {
+        this.timeWhen = timeWhen;
     }
 
     public Date getCreated() {
@@ -129,8 +139,9 @@ public class ChangeLogEntity {
                 ", author='" + author + '\'' +
                 ", message='" + message + '\'' +
                 ", reason='" + reason + '\'' +
+                ", tags=" + tags +
                 ", type=" + type +
-                ", timestamp=" + timestamp +
+                ", timeWhen=" + timeWhen +
                 ", created=" + created +
                 ", updated=" + updated +
                 '}';

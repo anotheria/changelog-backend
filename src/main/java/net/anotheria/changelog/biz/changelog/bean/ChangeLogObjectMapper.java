@@ -1,7 +1,9 @@
 package net.anotheria.changelog.biz.changelog.bean;
 
 import net.anotheria.changelog.biz.changelog.persistence.ChangeLogEntity;
+import net.anotheria.changelog.biz.changelog.persistence.ChangeLogTagEntity;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,9 +19,9 @@ public final class ChangeLogObjectMapper {
         result.setAuthor(toMap.getAuthor());
         result.setMessage(toMap.getMessage());
         result.setReason(toMap.getReason());
-        //result.setTags(toMap.getTags());
+        result.setTags(toMap.getTags().stream().map(ChangeLogTagEntity::getTag).collect(Collectors.toList()));
         result.setType(toMap.getType());
-        result.setTimestamp(toMap.getTimestamp());
+        result.setTimestamp(toMap.getTimeWhen().getTime());
         return result;
     }
 
@@ -29,9 +31,9 @@ public final class ChangeLogObjectMapper {
         result.setAuthor(toMap.getAuthor());
         result.setMessage(toMap.getMessage());
         result.setReason(toMap.getReason());
-        //result.setTags(toMap.getTags());
+        result.setTags(toMap.getTags().stream().map(tag -> new ChangeLogTagEntity(new ChangeLogTagEntity.Id(toMap.getId(), tag))).collect(Collectors.toList()));
         result.setType(toMap.getType());
-        result.setTimestamp(toMap.getTimestamp());
+        result.setTimeWhen(new Date(toMap.getTimestamp()));
         return result;
     }
 }

@@ -61,7 +61,8 @@ public class ChangeLogBO implements Serializable {
     }
 
     public void setTags(List<String> tags) {
-        this.tags = tags;
+        this.tags.clear();
+        this.tags.addAll(tags);
     }
 
     public ChangeLogType getType() {

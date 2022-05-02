@@ -14,23 +14,25 @@ public final class ChangeLogObjectMapper {
 
     public static ChangeLogBO map(ChangeLogAO toMap) {
         ChangeLogBO result = new ChangeLogBO();
-        result.setTimestamp(toMap.getTimestamp());
+        result.setId(toMap.getId());
         result.setAuthor(toMap.getAuthor());
         result.setMessage(toMap.getMessage());
         result.setReason(toMap.getReason());
         result.setTags(toMap.getTags());
         result.setType(toMap.getType());
+        result.setTimestamp(toMap.getTimestamp());
         return result;
     }
 
     public static ChangeLogAO map(ChangeLogBO toMap) {
         ChangeLogAO result = new ChangeLogAO();
-        result.setTimestamp(toMap.getTimestamp());
+        result.setId(toMap.getId());
         result.setAuthor(toMap.getAuthor());
         result.setMessage(toMap.getMessage());
         result.setReason(toMap.getReason());
         result.setTags(toMap.getTags());
         result.setType(toMap.getType());
+        result.setTimestamp(toMap.getTimestamp());
         return result;
     }
 
