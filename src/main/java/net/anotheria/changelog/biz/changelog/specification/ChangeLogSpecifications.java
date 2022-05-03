@@ -22,7 +22,7 @@ public final class ChangeLogSpecifications {
         return SpecificationsFactory.searchTerm(searchTerm, searchFields);
     }
 
-    public static Specification<ChangeLogEntity> accessType(ChangeLogType type) {
+    public static Specification<ChangeLogEntity> type(ChangeLogType type) {
         return (root, query, cb) -> cb.equal(root.get("type"), type);
     }
 

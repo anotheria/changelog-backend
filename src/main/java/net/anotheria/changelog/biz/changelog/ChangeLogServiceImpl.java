@@ -67,7 +67,7 @@ public class ChangeLogServiceImpl implements ChangeLogService {
                 tags.forEach(t -> t.getId().setChangelogId(id));
                 toSave.setTags(tags);
             }
-            return toSave.getId();
+            return repository.save(toSave).getId();
         } catch (Exception e) {
             throw new ChangeLogServiceException("Failed to save entity: " + changeLog, e);
         } finally {

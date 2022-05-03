@@ -42,10 +42,8 @@ public class ChangeLogEntity {
     @Column(name = "reason")
     private String reason;
 
-//    @OneToMany(mappedBy = "id.changelogId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-//    @NotFound(action = NotFoundAction.IGNORE)
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "changelog_id")
+    @OneToMany(mappedBy = "id.changelogId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private List<ChangeLogTagEntity> tags;
 
     @Column(name = "type")
