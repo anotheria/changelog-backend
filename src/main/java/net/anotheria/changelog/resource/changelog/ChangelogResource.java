@@ -10,6 +10,7 @@ import net.anotheria.changelog.resource.ReplyObject;
 import net.anotheria.moskito.aop.annotation.Monitor;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -57,6 +58,18 @@ public class ChangelogResource extends BaseResource {
 //	@SecurityRequirement(name = "authToken")
 	public ReplyObject list(ChangeLogSearchCriteria criteria) throws APIException {
 		return ReplyObject.success("data", changeLogAPI.list(criteria));
+	}
+
+	@DELETE
+	@Path("/delete/{id}")
+//	@SecurityRequirement(name = "authToken")
+	public ReplyObject delete(@PathParam("id") Integer id){
+		try {
+			changeLogAPI.delete(id);
+			return ReplyObject.success();
+		} catch(APIException e){
+			return ReplyObject.error(e);
+		}
 	}
 
     @GET
