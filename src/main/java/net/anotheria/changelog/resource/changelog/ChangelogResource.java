@@ -4,6 +4,7 @@ import net.anotheria.anoplass.api.APIException;
 import net.anotheria.anoplass.api.APIFinder;
 import net.anotheria.changelog.api.changelog.ChangeLogAPI;
 import net.anotheria.changelog.api.changelog.bean.ChangeLogAO;
+import net.anotheria.changelog.biz.changelog.specification.ChangeLogSearchCriteria;
 import net.anotheria.changelog.resource.BaseResource;
 import net.anotheria.changelog.resource.ReplyObject;
 import net.anotheria.moskito.aop.annotation.Monitor;
@@ -54,10 +55,8 @@ public class ChangelogResource extends BaseResource {
 	@POST
 	@Path("/list")
 //	@SecurityRequirement(name = "authToken")
-	public ReplyObject list() throws APIException {
-		List<ChangeLogAO> list = changeLogAPI.list();
-		list.addAll(changeLogAPI.getEntries());
-		return ReplyObject.success("data", list);
+	public ReplyObject list(ChangeLogSearchCriteria criteria) throws APIException {
+		return ReplyObject.success("data", changeLogAPI.list(criteria));
 	}
 
     @GET

@@ -4,6 +4,9 @@ import net.anotheria.anoplass.api.API;
 import net.anotheria.anoplass.api.APIException;
 import net.anotheria.changelog.api.changelog.bean.ChangeLogAO;
 import net.anotheria.changelog.biz.changelog.bean.ChangeLogType;
+import net.anotheria.changelog.biz.changelog.specification.ChangeLogSearchCriteria;
+import net.anotheria.changelog.biz.changelog.specification.ChangeLogSortProperty;
+import net.anotheria.changelog.biz.shared.filter.SearchResult;
 
 import java.util.List;
 
@@ -21,7 +24,7 @@ public interface ChangeLogAPI extends API {
 
     void delete(int id) throws APIException;
 
-    List<ChangeLogAO> list() throws APIException;
+    SearchResult<ChangeLogAO, ChangeLogSortProperty> list(ChangeLogSearchCriteria criteria) throws APIException;
 
     List<ChangeLogAO> getEntries() throws APIException;
 

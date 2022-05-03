@@ -10,6 +10,9 @@ import net.anotheria.changelog.biz.changelog.ChangeLogService;
 import net.anotheria.changelog.biz.changelog.bean.ChangeLogBO;
 import net.anotheria.changelog.biz.changelog.exception.ChangeLogServiceException;
 import net.anotheria.changelog.biz.changelog.bean.ChangeLogType;
+import net.anotheria.changelog.biz.changelog.specification.ChangeLogSearchCriteria;
+import net.anotheria.changelog.biz.changelog.specification.ChangeLogSortProperty;
+import net.anotheria.changelog.biz.shared.filter.SearchResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,10 +80,10 @@ public class ChangeLogAPIImpl extends AbstractAPIImpl implements ChangeLogAPI {
 	}
 
 	@Override
-	public List<ChangeLogAO> list() throws APIException {
+	public SearchResult<ChangeLogAO, ChangeLogSortProperty> list(ChangeLogSearchCriteria criteria) throws APIException {
 		try {
-			List<ChangeLogBO> changeLogBOList = changeLogService.list();
-			return ChangeLogObjectMapper.mapItems(changeLogBOList);
+			SearchResult<ChangeLogBO, ChangeLogSortProperty> searchResult = changeLogService.list(criteria);
+			return new SearchResult<>(criteria.getSort(), searchResult.getPaging(), ChangeLogObjectMapper.mapItems(searchResult.getItems()));
 		} catch (ChangeLogServiceException e) {
 			log.error(e.getMessage(), e);
 			throw new APIException(e.getMessage(), e);
