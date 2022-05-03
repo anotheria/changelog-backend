@@ -4,7 +4,17 @@ import net.anotheria.changelog.biz.shared.filter.property.FilterProperty;
 
 public enum ChangeLogFilterProperty implements FilterProperty {
     /**
-     * TYPE
+     * Type
      */
-    TYPE
+    TYPE,
+
+    /**
+     * Author
+     */
+    AUTHOR,
+
+    /**
+     * Tag
+     */
+    TAG
 }

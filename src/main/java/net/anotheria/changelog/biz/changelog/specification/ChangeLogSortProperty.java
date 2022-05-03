@@ -11,6 +11,8 @@ public enum ChangeLogSortProperty implements EntitySortProperty {
 
     TIMESTAMP("timestamp"),
 
+    TYPE("type"),
+
     ;
 
     private String entityPropertyName;

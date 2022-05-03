@@ -12,6 +12,10 @@ public class ChangeLogFilterSpecificationBuilder extends BaseFilterSpecification
             case TYPE:
                 ChangeLogType type = ChangeLogType.valueOf(value);
                 return ChangeLogSpecifications.accessType(type);
+            case TAG:
+                return ChangeLogSpecifications.tag(value);
+            case AUTHOR:
+                return ChangeLogSpecifications.author(value);
             default:
                 return null;
         }
