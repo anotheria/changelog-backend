@@ -3,6 +3,9 @@ package net.anotheria.changelog.biz.changelog;
 import net.anotheria.anoprise.metafactory.Service;
 import net.anotheria.changelog.biz.changelog.bean.ChangeLogBO;
 import net.anotheria.changelog.biz.changelog.exception.ChangeLogServiceException;
+import net.anotheria.changelog.biz.changelog.specification.ChangeLogSearchCriteria;
+import net.anotheria.changelog.biz.changelog.specification.ChangeLogSortProperty;
+import net.anotheria.changelog.biz.shared.filter.SearchResult;
 import org.distributeme.annotation.DistributeMe;
 import org.distributeme.annotation.FailBy;
 import org.distributeme.core.failing.RetryCallOnce;
@@ -20,7 +23,7 @@ public interface ChangeLogService extends Service {
 
     void delete(int id) throws ChangeLogServiceException;
 
-    List<ChangeLogBO> list() throws ChangeLogServiceException;
+    SearchResult<ChangeLogBO, ChangeLogSortProperty> list(ChangeLogSearchCriteria criteria) throws ChangeLogServiceException;
 
     List<String> getTags() throws ChangeLogServiceException;
 }

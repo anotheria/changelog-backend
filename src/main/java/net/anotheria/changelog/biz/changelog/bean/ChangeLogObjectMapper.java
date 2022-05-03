@@ -21,7 +21,7 @@ public final class ChangeLogObjectMapper {
         result.setReason(toMap.getReason());
         result.setTags(toMap.getTags().stream().map(ChangeLogTagEntity::getTag).collect(Collectors.toList()));
         result.setType(toMap.getType());
-        result.setTimestamp(toMap.getTimeWhen().getTime());
+        result.setTimestamp(toMap.getTimestamp().getTime());
         return result;
     }
 
@@ -33,7 +33,7 @@ public final class ChangeLogObjectMapper {
         result.setReason(toMap.getReason());
         result.setTags(toMap.getTags().stream().map(tag -> new ChangeLogTagEntity(new ChangeLogTagEntity.Id(toMap.getId(), tag))).collect(Collectors.toList()));
         result.setType(toMap.getType());
-        result.setTimeWhen(new Date(toMap.getTimestamp()));
+        result.setTimestamp(new Date(toMap.getTimestamp()));
         return result;
     }
 }

@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Date;
@@ -41,8 +42,10 @@ public class ChangeLogEntity {
     @Column(name = "reason")
     private String reason;
 
-    @OneToMany(mappedBy = "id.changelogId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @NotFound(action = NotFoundAction.IGNORE)
+//    @OneToMany(mappedBy = "id.changelogId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @NotFound(action = NotFoundAction.IGNORE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "changelog_id")
     private List<ChangeLogTagEntity> tags;
 
     @Column(name = "type")
@@ -50,7 +53,7 @@ public class ChangeLogEntity {
     private ChangeLogType type;
 
     @Column(name = "time_when")
-    private Date timeWhen;
+    private Date timestamp;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)
@@ -108,12 +111,12 @@ public class ChangeLogEntity {
         this.type = type;
     }
 
-    public Date getTimeWhen() {
-        return timeWhen;
+    public Date getTimestamp() {
+        return timestamp;
     }
 
-    public void setTimeWhen(Date timeWhen) {
-        this.timeWhen = timeWhen;
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Date getCreated() {
@@ -141,7 +144,7 @@ public class ChangeLogEntity {
                 ", reason='" + reason + '\'' +
                 ", tags=" + tags +
                 ", type=" + type +
-                ", timeWhen=" + timeWhen +
+                ", timestamp=" + timestamp +
                 ", created=" + created +
                 ", updated=" + updated +
                 '}';
