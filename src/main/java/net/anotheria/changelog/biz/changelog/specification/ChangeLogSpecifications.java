@@ -23,7 +23,7 @@ public final class ChangeLogSpecifications {
     }
 
     public static Specification<ChangeLogEntity> accessType(ChangeLogType type) {
-        return (root, query, cb) -> cb.equal(root.get("type"), type.name());
+        return (root, query, cb) -> cb.equal(root.get("type"), type);
     }
 
     public static Specification<ChangeLogEntity> author(String value) {

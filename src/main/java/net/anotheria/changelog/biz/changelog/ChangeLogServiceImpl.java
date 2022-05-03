@@ -137,7 +137,7 @@ public class ChangeLogServiceImpl implements ChangeLogService {
 
         if (criteria.getTimeRange() != null) {
             TimeRange timeRange = criteria.getTimeRange();
-            searchSpec = searchSpec.and(SpecificationsFactory.between("timestamp", timeRange.getStart(), timeRange.getEnd()));
+            searchSpec = searchSpec.and(SpecificationsFactory.between("timestamp", timeRange.getStartDate(), timeRange.getEndDate()));
         }
 
         Specifications<ChangeLogEntity> filterSpec = new ChangeLogFilterSpecificationBuilder()
