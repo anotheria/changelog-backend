@@ -1,0 +1,21 @@
+{
+    "appName": "EXTAPI",
+    "restAccessControlAllowOrigin": [
+        "*"
+    ],
+    "test": {
+        "restAccessControlAllowOrigin": [
+            "*"
+        ]
+    },
+    "beta": {
+        "restAccessControlAllowOrigin": [
+            "*"
+        ]
+    },
+    "prod": {
+        "restAccessControlAllowOrigin": [
+            "*"
+        ]
+    }
+}

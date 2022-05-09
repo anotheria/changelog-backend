@@ -110,6 +110,10 @@
     <logger name="org.hibernate.type" level="TRACE" />
     <logger name="net.anotheria.changelog" level="DEBUG"/>
 
+    <logger name="net.anotheria.changelog.resource.CorsFilter" level="DEBUG" additivity="false">
+        <appender-ref ref="AppDebugAppender"/>
+    </logger>
+
     <root level="ERROR">
         <appender-ref ref="ConsoleAppender"/>
         <appender-ref ref="AppErrorAppender"/>

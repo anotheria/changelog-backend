@@ -32,6 +32,18 @@
 		<servlet-name>JerseyServletContainer</servlet-name>
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
+
+    <filter>
+        <filter-name>CORSFilter</filter-name>
+        <filter-class>net.anotheria.changelog.resource.CorsFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CORSFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
+
 	<listener>
 		<listener-class>net.anotheria.changelog.listener.ContextInitializer</listener-class>
 	</listener>
