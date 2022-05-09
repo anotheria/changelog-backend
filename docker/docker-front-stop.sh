@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker stop changelog-front
+docker stop changelog-ui

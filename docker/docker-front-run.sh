@@ -3,7 +3,7 @@
 docker run \
     --rm \
     --network chagelog-network \
-    --name changelog-front \
+    --name changelog-ui \
     -p 8080:80 \
     -d \
-    anotheria/changelog-front
+    anotheria/changelog-ui
