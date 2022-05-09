@@ -8,6 +8,7 @@ docker run \
     -e POSTGRES_USER=changelog \
     -e POSTGRES_PASSWORD=changelog \
     -e POSTGRES_DB=changelog \
-    `#-e PGDATA=/Users/ano/IdeaProjects/changelog/changelog-postgres/data/pgdata` \
+    -e PGDATA=/var/lib/postgresql/data/pgdata \
+    `#-v "/absolute/path/to/directory-with-data":/var/lib/postgresql/data` \
     -d \
     postgres:13.3
